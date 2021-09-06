@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title> TV series Search</title>
+        <meta name="description" content="">
+
+        <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+        <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+        {% load static %}
+        <link rel="stylesheet" href="/static/css/style1.css">
+        <link rel="stylesheet" href="/static/css/style2.css">
+    </head>
+
+    <body>
+    <nav class="navbar navbar-light navbar-expand-md navigation-clean-button">
+        <div class="container-fluid" style="display:flex;justify-content: start;">
+        <a href="/search"><img src="/static/img/search.png" width="60" height="60" style="margin-bottom:0px;"></a>
+        <a href="/"><img src="/static/img/video.png" width="60" height="60" style="margin-bottom:0px;margin-left:20px;"></a>
+        <a href="/authorIndex"><img src="/static/img/human.png" width="55" height="50" style="margin-bottom:0px;margin-left:20px;"></a>
+        </div>
+    </nav>
+
+
+    {% block main_block %}
+    {% endblock main_block %}
+
+    <footer id="footer">
+    <div style= "text-align: center;margin:0px;padding:10px;padding-top:20px;padding-bottom:0px;">
+        <p style= "color:#5EAAA8; font-family:raleway;margin-top:0px;">All right belongs to the video contributer.</p><a style="color: #F05945;font-family: raleway;" target="_blank" href="https://www.youtube.com" rel="noopener noreferrer">See more in Youtube</a>
+    </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/style.js"></script>
+    </body>
+</html>

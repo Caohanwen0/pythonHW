@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load description_show %}
+{% load video_token %}
+{% load byte_to_str %}
+{% block main_block %}
+<main> 
+    <div class="container">
+        <div class="container" style="display:flex;align-items: center;justify-content: start;">
+        <a title="See more at Youtube" style="font-family:raleway;order:0;flex:1;"href="{{author.link}}" ><img class="clip-a-bigball" src="{{ author.image }}"></a>
+        <div style="order:1;flex:1;display:flex;flex-direction: column;align-items: center;justify-content:center;">
+        <h1 style="font-family:raleway;color:#5EAAA8;position:relative;flex:1;order:0;"><a href="{{author.link}}"><b>{{author.name}}</b></h2></a>
+        <p style="font-family:raleway;color: #F05945;position:relative;flex:1;order:1;"> {{author.follower|byte_to_str}} followers</p>
+        </div>
+        </div>
+        <div class="profile-container">
+            {% for paragraph in paragraph_list %}
+            <p style="color:#5EAAA8;font-family:raleway;font-size:20px;">
+                {{paragraph}}
+            </p>
+            {% endfor %}
+        </div>
+        <p class="paginary" style="text-align: center" >See {{author.name}}'s {{TOTAL_RESULT}} work,currently at page {{page_obj.number}} / {{TOTAL_PAGE}}.<br></p>
+        {% for video in page_obj %}
+        <div class="video-container">
+                <div style="order:1;flex:1;padding:0px;">
+                <h1 class="video-title"><a href="/video/Detail/{{ video.url|video_token }}"><b>{{video.title}}</b> </a></h1>
+                </div>
+            <div style="order:0;flex:0;">
+            <img class="clip-square" src="{{video.image}}">
+            </div>
+        </div>
+        {% endfor %}
+    <!--展示页码和跳转按钮-->
+    <p style="text-align: center">
+        {% if page_obj.has_previous %}
+        <a class="paginary" href="?page={{ page_obj.previous_page_number }}">Last page</a>
+        {% endif %}
+        <span class="paginary">The {{ page_obj.number }} page | Total {{ page_obj.paginator.num_pages }} page</span>
+        {% if page_obj.has_next %}
+        <a class="paginary" href="?page={{ page_obj.next_page_number }}">Next page</a>
+        {% endif %} 
+    </p>
+    {% csrf_token %}
+        <p>
+            <form name="input" method="get" style="text-align:center">
+                <span class="paginary">Jump to<input type="text" class="box-jumppage" name="jump_page" value="" placeholder="">page.</span>
+            </form>
+        </p>
+    </div>  
+</main>
+{% endblock main_block %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load get_author_detail %}
+{% block main_block %}
+<style>
+.author-container{
+    float:left;
+    width:100%;
+    height:100px;
+    position:relative;
+    margin:20px 0 20px;
+    border-radius:10px;
+    /*background-color:#F7F3E9;*/
+    background-color:transparent;
+    box-shadow:0 1px 10px -6px rgba(0,0,0,.5);
+    transition:box-shadow .3s ease;
+    overflow:hidden;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    flex-direction: row;
+    }
+.author-name{
+    font-size:25px;
+    font-family:raleway;
+    color:#5EAAA8;
+    order:1;
+    flex:1;
+    display:inline;
+}
+.clip-a-ball{
+	width: 85px;
+  	height: 85px;
+ 	border-radius: 50%;
+  	overflow: hidden;
+	padding:0px;
+	margin:0px;
+	border:0px;
+    order:0;
+    flex:1;
+    display:inline;
+}
+
+</style>
+    <main> 
+        <div class="container">
+            <p class="paginary" style="text-align: center" >Find {{TOTAL_RESULT}} results about "{{KEY_WORD}}",currently at page {{page_obj.number}} / {{TOTAL_PAGE}}.<br></p>
+            <p class="paginary" style="text-align: center" >Use {{intern}} second.<br></p> 
+            {% for author in page_obj %}
+            <div class="author-container"><a href="{{author.link|get_author_detail}}">
+                <img class="clip-a-ball" src="{{author.image}}">
+                <p class="author-name">{{author.name}}</p>
+                </a>
+            </div>
+            {% endfor %}
+            <p style="text-align: center">
+                {% if page_obj.has_previous %}
+                <a class="paginary" href="?page={{ page_obj.previous_page_number }}">Last page</a>
+                {% endif %}
+                <span class="paginary">The {{ page_obj.number }} page | Total {{ page_obj.paginator.num_pages }} page</span>
+                {% if page_obj.has_next %}
+                <a class="paginary" href="?page={{ page_obj.next_page_number }}">Next page</a>
+                {% endif %} 
+            </p>
+            {% csrf_token %}
+            <p>
+                <form name="input" method="get" style="text-align:center">
+                    <span class="paginary">Jump to<input type="text" class="box-jumppage" name="jump_page" value="" placeholder="">page.</span>
+                </form>
+            </p>
+        </div>
+    </main>
+{% endblock main_block %}

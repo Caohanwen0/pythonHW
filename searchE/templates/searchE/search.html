@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main_block %}
+<style>
+.search-box{
+        font-family:raleway;
+        font-size:20px;
+        color:#5EAAA8;
+        border-radius:8px;
+        background-color:transparent;
+        border-color:#A3D2CA;
+        border-width: 2pt;
+        margin:20px;
+    }
+.title-of-web
+{
+	font-size:60px;
+	font-weight:6px;
+	color:#5EAAA8;
+	text-align:center;
+	padding:0px;
+	margin:0px;
+	border:0px;
+    font-family:raleway;
+    text-align: center;
+}
+</style>
+
+    <main> 
+        <div>
+                {% csrf_token %}
+                <div class="container">
+                <div class="title-of-web" style="position:relative;top:220px;"><b>Explore what interest you.</b></div>
+                <div style="position:relative;top:230px;text-align:center;">
+                <form name="input" method="get">
+                    <img src="/static/img/human.png" width="40" height="40" style="display:inline;border:20px;padding:5px;"><input class="search-box" type="text" placeholder="search by contributer" name="kw_author" value="">
+                </form>
+                <form name="input" method="get">
+                    <img src="/static/img/video.png" width="40" height="40" style="display:inline;border:20px;padding:5px;"><input class="search-box" type="text" placeholder="search by video" name="kw_video" value="">
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+{% endblock main_block %}

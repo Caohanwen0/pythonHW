@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load video_token %}
+{% block main_block %}
+<style>
+.box-jumppage{
+	font-family:raleway;
+    font-size:20px;
+    color:#5EAAA8;
+    border-radius:8px;
+	width:40px;
+    background-color:transparent;
+    border-color:#A3D2CA;
+    border-width: 2pt;
+}
+.welcome-title{
+	font-size:60px;
+	font-weight:6px;
+	color:#5EAAA8;
+	text-align:center;
+	padding:0px;
+    margin-top:0px;
+	margin-bottom:30px;
+	border:0px;
+    font-family:raleway;
+    text-align: center;
+    line-height:10px;
+}
+</style>
+<main> 
+    <div class="container">
+        <p class="welcome-title"><img src="../../static/img/TV.png" style="width:60px;">Welcome!</p>
+        <p class="welcome-title">See these intriguing TV series.</p>
+        <p class="paginary" style="text-align: center" >Total of {{TOTAL_RESULT}} videos.Currently at page {{page_obj.number}} / {{TOTAL_PAGE}}.<br></p>
+        {% for video in page_obj %}
+        <div class="video-container">
+                <div style="order:1;flex:1;padding:0px;">
+                <h1 class="video-title"><a href="/video/Detail/{{ video.url|video_token }}"><b>{{video.title}}</b> </a></h1>
+                </div>
+            <div style="order:0;flex:0;">
+            <img class="clip-square" src="{{video.image}}">
+            </div>
+        </div>
+        {% endfor %}
+        <p style="text-align: center">
+            {% if page_obj.has_previous %}
+            <a class="paginary" href="?page={{ page_obj.previous_page_number }}">Last page</a>
+            {% endif %}
+            <span class="paginary">The {{ page_obj.number }} page | Total {{ page_obj.paginator.num_pages }} page</span>
+            {% if page_obj.has_next %}
+            <a class="paginary" href="?page={{ page_obj.next_page_number }}">Next page</a>
+            {% endif %} 
+        </p>
+        {% csrf_token %}
+            <p>
+                <form name="input" method="get" style="text-align:center">
+                    <span class="paginary">Jump to<input type="text" class="box-jumppage" name="jump_page" value="" placeholder="">page.</span>
+                </form>
+            </p>
+    </div>
+</main>
+{% endblock main_block %}
